@@ -1,1 +1,420 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="نبض العلاقة">
+<meta name="theme-color" content="#1d0c1a">
+<title>نبض العلاقة</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#fbeef1;--mute:#c9a9b4;--card:rgba(255,240,244,.08);--line:rgba(255,220,230,.18);--rose:#e8627c;--gold:#e6b980;--green:#5fd08f;--amber:#f0b04a;--red:#ef6a63;--glow:#e8627c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{color:var(--ink);font:400 16px/1.7 Tajawal,Tahoma,sans-serif;background:radial-gradient(900px 500px at 50% -10%,#6b2243 0,transparent 70%),radial-gradient(700px 500px at 100% 100%,#3b1530 0,transparent 70%),#1d0c1a;background-attachment:fixed}
+main{max-width:640px;margin:0 auto;padding:20px 16px 56px;display:grid;gap:16px}
+h1,h2{font-family:'Aref Ruqaa',Tajawal,serif;font-weight:700;margin:0}
+h1{font-size:2rem;text-align:center;color:#ffd9e2}
+h2{font-size:1.25rem;margin-bottom:10px;color:#ffd9e2}
+.sub{color:var(--mute);margin:0;text-align:center}
+section{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;backdrop-filter:blur(8px)}
+.stage{perspective:800px;height:210px;display:grid;place-items:center;position:relative}
+.sway,.beat{position:relative;width:170px;height:160px;transform-style:preserve-3d}
+.sway{animation:sway 7s ease-in-out infinite alternate}
+.beat{animation:beat var(--beat,1.3s) ease-in-out infinite}
+.layer{position:absolute;inset:0}
+.layer svg{width:100%;height:100%;overflow:visible;display:block}
+.shadow{position:absolute;bottom:2px;width:130px;height:16px;border-radius:50%;background:var(--glow);filter:blur(14px);opacity:.55}
+@keyframes sway{from{transform:rotateX(10deg) rotateY(-34deg)}to{transform:rotateX(10deg) rotateY(34deg)}}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.09)}28%{transform:scale(1)}42%{transform:scale(1.05)}}
+.mood{text-align:center}
+.pct{font-size:2.8rem;font-weight:700;line-height:1.1;transition:color .5s}
+.state{font-family:'Aref Ruqaa',serif;font-size:1.3rem}
+.msg{color:var(--mute);margin:2px 0 0}
+.bar{height:10px;border-radius:99px;margin:16px 0 4px;position:relative;background:linear-gradient(to left,var(--green) 0 20%,var(--amber) 20% 50%,var(--red) 50% 100%)}
+.mark{position:absolute;top:-5px;width:6px;height:20px;border-radius:3px;background:#fff;transform:translateX(-50%);transition:left .6s}
+.scale{display:flex;justify-content:space-between;color:var(--mute);font-size:.78rem;direction:ltr}
+.trend{border-inline-start:5px solid var(--mute)}
+.trend b{font-size:1.1rem}
+label{display:block;font-weight:500;margin:10px 0 4px}
+input,textarea{width:100%;font:inherit;color:inherit;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;padding:10px;color-scheme:dark}
+input[type=range]{padding:0;accent-color:var(--rose)}
+input[type=checkbox]{width:auto;accent-color:var(--rose);transform:scale(1.3)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:10px 16px;cursor:pointer;background:linear-gradient(135deg,#f0708a,#c93f69);color:#fff}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:500}
+button.danger{background:transparent;color:var(--red);border:1px solid var(--red);font-weight:500}
+form button{margin-top:14px;width:100%}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chk{display:flex;gap:10px;align-items:center;margin:0 0 8px;cursor:pointer}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+li{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:4px;background:rgba(255,255,255,.04)}
+.sev{min-width:2rem;text-align:center;border-radius:8px;color:#1d0c1a;font-weight:700;padding:0 8px}
+.date{color:var(--mute);font-size:.9rem}
+.empty{color:var(--mute);text-align:center;border:0;background:none}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.note{font-size:.85rem;color:var(--mute);text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.stat{text-align:center;border:1px solid var(--line);border-radius:14px;padding:8px 4px;background:rgba(255,255,255,.04)}.stat b{display:block;font-size:1.7rem;line-height:1.3;color:var(--gold)}.stat span{font-size:.78rem;color:var(--mute)}
+#chart svg,#intChart svg{width:100%;height:auto;display:block;direction:ltr}
+@media (prefers-reduced-motion:reduce){.sway,.beat{animation:none}.sway{transform:rotateX(10deg) rotateY(-18deg)}}
+
+/* Theme + Toast + Edit */
+[data-theme="light"]{
+  --ink:#2a1520;--mute:#7a5a68;--card:rgba(255,255,255,.85);--line:rgba(180,100,120,.2);
+  --rose:#d44a66;--gold:#c4923a;--green:#2d9a5a;--amber:#d4920f;--red:#d94a42;
+}
+[data-theme="light"] body{
+  background:radial-gradient(900px 500px at 50% -10%,#f5d0dc 0,transparent 70%),radial-gradient(700px 500px at 100% 100%,#f0e4e8 0,transparent 70%),#faf5f7;
+  color:var(--ink);
+}
+[data-theme="light"] h1,[data-theme="light"] h2{color:#8b2a45}
+[data-theme="light"] input,[data-theme="light"] textarea{background:rgba(0,0,0,.04);color-scheme:light;color:var(--ink)}
+[data-theme="light"] li{background:rgba(0,0,0,.03)}
+[data-theme="light"] .sev{color:#fff}
+.topbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:4px}
+.icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer;display:grid;place-items:center}
+.icon-btn:hover{border-color:var(--rose)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);color:var(--ink);padding:12px 22px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 8px 28px rgba(0,0,0,.25);z-index:100;opacity:0;transition:transform .3s,opacity .3s;border:1px solid var(--line);white-space:nowrap;max-width:90vw;backdrop-filter:blur(10px)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+li.editable{cursor:pointer;transition:border-color .15s}
+li.editable:hover{border-color:var(--rose)}
+.li-actions{display:flex;gap:6px}
+.li-actions button{padding:4px 10px;font-size:.85rem;margin:0;width:auto}
+.edit-mode{border-color:var(--gold)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 30%,transparent)}
+
+</style>
+</head>
+<body>
+<main>
+  <div class="topbar">
+    <button class="icon-btn" id="themeBtn" aria-label="تبديل الوضع" title="وضع فاتح/داكن">🌓</button>
+  </div>
+  <header>
+    <h1>نبض العلاقة</h1>
+    <p class="sub">سجّل الخلافات ليظهر لك اتجاه العلاقة. بياناتك خاصة بك وحدك.</p>
+    <p class="note" id="sync">البيانات محفوظة على هذا الجهاز فقط.</p>
+  </header>
+
+  <section class="mood" aria-live="polite">
+    <div class="stage" aria-hidden="true"><div class="shadow"></div><div class="sway"><div class="beat" id="heart"></div></div></div>
+    <div class="pct" id="pct">100%</div>
+    <div class="state" id="state"></div>
+    <p class="msg" id="msg"></p>
+    <div class="bar"><div class="mark" id="mark"></div></div>
+    <div class="scale"><span>0%</span><span>50%</span><span>80%</span><span>100%</span></div>
+  </section>
+
+  <section class="trend" id="trendBox" aria-live="polite">
+    <h2>التنبؤ</h2>
+    <b id="trendTitle"></b>
+    <p class="msg" id="trendText"></p>
+  </section>
+
+  <section>
+    <label class="chk"><input type="checkbox" id="showLine"> إظهار المؤشر الخطي للعلاقة</label>
+    <div id="lineWrap" hidden>
+      <h2>مسار العلاقة</h2>
+      <div id="chart"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row"><h2>القرب الحميم</h2><label class="chk" style="margin:0;font-size:.9rem"><input type="checkbox" id="showInt"> إظهار</label></div>
+    <div id="intWrap" hidden>
+      <label class="chk"><input type="checkbox" id="linkInt"> احتساب القرب الحميم في مؤشر العلاقة</label>
+      <p class="msg" id="linkNote" style="margin-bottom:10px"></p>
+      <div class="stats">
+        <div class="stat"><b id="i7">0</b><span>آخر 7 أيام</span></div>
+        <div class="stat"><b id="i30">0</b><span>آخر 30 يومًا</span></div>
+        <div class="stat"><b id="ip30">0</b><span>الـ30 قبلها</span></div>
+      </div>
+      <p class="msg" id="intTrend"></p>
+      <div id="intChart"></div>
+      <form id="intForm" class="row" style="margin-top:10px">
+        <input type="date" id="idate" required aria-label="تاريخ اللقاء">
+        <button type="submit" style="white-space:nowrap">تسجيل</button>
+      </form>
+      <ul id="intList" style="margin-top:10px"></ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>إضافة خلاف</h2>
+    <form id="form">
+      <label for="date">تاريخ الخلاف</label>
+      <input type="date" id="date" required>
+      <label for="desc">وصف الخلاف أو سببه</label>
+      <textarea id="desc" rows="3" maxlength="400" required></textarea>
+      <label for="sev">الشدة: <b id="sevVal">5</b> من 10</label>
+      <input type="range" id="sev" min="1" max="10" value="5">
+      <button type="submit">إضافة خلاف</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>الخلافات المسجلة (<span id="count">0</span>)</h2>
+    <ul id="list"></ul>
+    <div class="tools">
+      <button class="ghost" id="export">تصدير البيانات</button>
+      <button class="ghost" id="import">استيراد البيانات</button>
+      <button class="danger" id="clear">مسح جميع البيانات</button>
+    </div>
+    <div id="xferBox" hidden style="margin-top:12px">
+      <p class="msg" id="xferMsg"></p>
+      <textarea id="xfer" rows="5" dir="ltr" aria-label="نص البيانات"></textarea>
+      <div class="tools"><button class="ghost" id="xferCopy">نسخ</button><button id="xferGo" hidden>استيراد الآن</button></div>
+    </div>
+  </section>
+
+  <p class="note">مؤشر تقريبي مبني على ما تسجّله فقط، وليس تقييمًا متخصصًا. الخلافات الأحدث تؤثر أكثر من القديمة. إن شعرت أن العلاقة تتعبك، فالحديث مع مستشار أسري خطوة مفيدة.</p>
+  <div class="toast" id="toast"></div>
+</main>
+
+<script>
+const IKEY='marriage-intimacy-v1', KEY='marriage-conflicts-v1', PREF='marriage-prefs-v1', DAY=864e5;
+const $=id=>document.getElementById(id);
+let items=[], intim=[], prefs={line:true,int:true,link:true,theme:'dark'};
+let editingId=null;
+
+function toast(msg,ms=2400){
+  const t=$('toast'); if(!t)return;
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),ms);
+}
+function applyTheme(){
+  const th=prefs.theme==='light'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',th);
+  const btn=$('themeBtn'); if(btn)btn.textContent=th==='light'?'🌙':'☀️';
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.content=th==='light'?'#faf5f7':'#1d0c1a';
+}
+
+function load(){
+  try{items=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){items=[]}
+  try{intim=JSON.parse(localStorage.getItem(IKEY))||[]}catch(e){intim=[]}
+  try{prefs=Object.assign(prefs,JSON.parse(localStorage.getItem(PREF))||{})}catch(e){}
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items))}catch(e){}dirty=true;pushRemote()}
+function saveI(){try{localStorage.setItem(IKEY,JSON.stringify(intim))}catch(e){}dirty=true;pushRemote()}
+function savePrefs(){try{localStorage.setItem(PREF,JSON.stringify(prefs))}catch(e){}pushRemote()}
+let remote=null, dirty=false, chain=Promise.resolve();
+const union=(a,b)=>{const m=new Map();[...a,...b].forEach(x=>m.set(x.id,x));return[...m.values()]};
+function pushRemote(){
+  if(!remote)return;
+  chain=chain.then(()=>remote.set({conflicts:items,intimacy:intim,prefs})).then(()=>setSync(true),()=>setSync(false));
+}
+function setSync(ok){$('sync').textContent=ok?'☁︎ بياناتك محفوظة في حسابك، ولن تضيع عند إغلاق التطبيق.':'تعذّر الحفظ في حسابك الآن. استخدم «تصدير البيانات» للاحتياط.'}
+async function connectRemote(){
+  try{
+    if(typeof claude==='undefined'||!claude.use)return;
+    const [db,user]=await Promise.all([claude.use('db'),claude.use('user')]);
+    if(!db||!user)return;
+    const uid=await user.id(); if(!uid)return;
+    const ref=db.doc('data/users/'+uid+'/state'), snap=await ref.get();
+    remote=ref;
+    if(snap.exists){
+      const d=JSON.parse(JSON.stringify(snap.data()||{}));
+      if(dirty){items=union(d.conflicts||[],items);intim=union(d.intimacy||[],intim)}
+      else{items=d.conflicts||[];intim=d.intimacy||[]}
+      if(d.prefs)Object.assign(prefs,d.prefs);
+      try{localStorage.setItem(KEY,JSON.stringify(items));localStorage.setItem(IKEY,JSON.stringify(intim))}catch(e){}
+      render(); if(dirty)pushRemote(); else setSync(true);
+    }else{pushRemote()}
+  }catch(e){setSync(false)}
+}
+
+const midnight=s=>new Date(s+'T00:00:00').getTime();
+const todayMs=()=>{const d=new Date();d.setHours(0,0,0,0);return d.getTime()};
+const daysAgo=s=>Math.max(0,Math.round((todayMs()-midnight(s))/DAY));
+const sevColor=n=>n>=8?'var(--red)':n>=5?'var(--amber)':'var(--green)';
+
+function healthAt(t){
+  const p=items.reduce((s,c)=>{const ct=midnight(c.date);return ct>t?s:s+c.sev*1.6*Math.exp(-((t-ct)/DAY)/30)},0);
+  return Math.max(0,Math.min(100,Math.round(100-p+bonusAt(t))));
+}
+function bonusAt(t){
+  if(!prefs.link)return 0;
+  return Math.min(20,intim.reduce((s,e)=>{const et=midnight(e.date);return et>t?s:s+2.5*Math.exp(-((t-et)/DAY)/21)},0));
+}
+const level=h=>h>=80?'good':h>=50?'mid':'bad';
+const THEME={
+  good:{hue:346,sat:82,l0:30,l1:60,glow:'#ff5f86',beat:'1.2s',name:'العلاقة جيدة جدًا',col:'var(--green)',msg:'قلبان في انسجام. حافظا على هذا الدفء.'},
+  mid:{hue:18,sat:78,l0:26,l1:54,glow:'#f0a04a',beat:'1.9s',name:'العلاقة متوسطة',col:'var(--amber)',msg:'الحب حاضر لكنه يحتاج إلى عناية وحديث هادئ.'},
+  bad:{hue:222,sat:14,l0:20,l1:44,glow:'#6a7a99',beat:'3s',name:'العلاقة سيئة جدًا',col:'var(--red)',msg:'القلب متعب. خذا وقتًا للإصغاء لبعضكما.'}
+};
+const HEART='M50 90C20 67 5 49 5 32 5 17 17 8 29 8c9 0 17 5 21 13 4-8 12-13 21-13 12 0 24 9 24 24 0 17-15 35-45 58z';
+
+let shownLevel='';
+function drawHeart(lv){
+  if(lv===shownLevel)return; shownLevel=lv;
+  const T=THEME[lv], N=16, step=2.6, el=$('heart'); let html='';
+  for(let i=0;i<N;i++){
+    const t=i/(N-1), z=((i-(N-1)/2)*step).toFixed(1);
+    const s=(1-.07*Math.pow(Math.abs(t-.5)*2,2)).toFixed(3);
+    const l=(T.l0+(T.l1-T.l0)*t).toFixed(1);
+    let extra='';
+    if(i===N-1){
+      extra=`<path d="${HEART}" fill="url(#hl)"/>`;
+      if(lv==='bad')extra+='<path d="M54 12 L46 34 L58 46 L44 62 L52 90" fill="none" stroke="#10131c" stroke-width="2.6" stroke-linejoin="round"/>';
+      if(lv==='mid')extra+='<path d="M24 22q8-8 16-4" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="4" stroke-linecap="round"/>';
+      if(lv==='good')extra+='<path d="M24 22q8-8 16-4" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="4" stroke-linecap="round"/>';
+    }
+    html+=`<div class="layer" style="transform:translateZ(${z}px) scale(${s})"><svg viewBox="0 0 100 100"><path d="${HEART}" fill="hsl(${T.hue} ${T.sat}% ${l}%)"/>${extra}</svg></div>`;
+  }
+  html=`<svg width="0" height="0" style="position:absolute"><defs><radialGradient id="hl" cx=".3" cy=".25" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></radialGradient></defs></svg>`+html;
+  el.innerHTML=html;
+  document.documentElement.style.setProperty('--beat',T.beat);
+  document.documentElement.style.setProperty('--glow',T.glow);
+  el.style.filter=`drop-shadow(0 0 18px ${T.glow}aa)`;
+}
+
+function trend(){
+  const win=(a,b)=>items.filter(c=>{const d=daysAgo(c.date);return d>=a&&d<b});
+  const rc=win(0,30), pc=win(30,60), w=a=>a.reduce((t,c)=>t+c.sev,0), r=w(rc), p=w(pc);
+  const txt=`${rc.length} خلاف في آخر 30 يومًا (مجموع الشدة ${r}) مقابل ${pc.length} في الـ30 يومًا التي قبلها (مجموع الشدة ${p}).`;
+  if(items.length<2)return{c:'var(--mute)',t:'لا توجد بيانات كافية',d:'سجّل خلافين على الأقل ليظهر الاتجاه.'};
+  if(!r&&!p)return{c:'var(--green)',t:'العلاقة مستقرة',d:'لا خلافات في آخر 60 يومًا.'};
+  const few=rc.length+pc.length<5, note='التسجيلات قليلة فلا يُعدّ هذا اتجاهًا واضحًا بعد. ';
+  if(r-p>=3&&r>p*1.2)return few?{c:'var(--amber)',t:'زيادة طفيفة في الخلافات',d:note+txt}:{c:'var(--red)',t:'العلاقة تسوء',d:'الخلافات تزداد: '+txt};
+  if(p-r>=3&&r<p*.8)return few?{c:'var(--green)',t:'انخفاض طفيف في الخلافات',d:note+txt}:{c:'var(--green)',t:'العلاقة تتحسن',d:'الخلافات تقل: '+txt};
+  return{c:'var(--amber)',t:'العلاقة مستقرة',d:'لا تغيّر واضح: '+txt};
+}
+
+function drawLine(){
+  const box=$('chart');
+  if(!items.length){box.innerHTML='<p class="msg">سجّل خلافًا ليظهر مسار العلاقة.</p>';return}
+  const end=todayMs(), first=Math.min(...items.map(c=>midnight(c.date)));
+  const start=Math.max(first-3*DAY,end-89*DAY), n=Math.round((end-start)/DAY)+1;
+  const W=320,H=150,px=10,py=12,pw=W-2*px,ph=H-2*py-14;
+  const X=i=>px+(n>1?i/(n-1):1)*pw, Y=h=>py+(1-h/100)*ph;
+  const pts=[];for(let i=0;i<n;i++)pts.push([X(i),Y(healthAt(start+i*DAY))]);
+  const line=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const area=line+` L${pts[n-1][0].toFixed(1)} ${Y(0)} L${pts[0][0].toFixed(1)} ${Y(0)}Z`;
+  const last=pts[n-1], T=THEME[level(healthAt(end))];
+  const fmt=t=>new Date(t).toLocaleDateString('ar-DZ',{month:'short',day:'numeric'});
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="مسار صحة العلاقة عبر الزمن">
+  <rect x="${px}" y="${Y(100)}" width="${pw}" height="${Y(80)-Y(100)}" fill="#5fd08f" opacity=".13"/>
+  <rect x="${px}" y="${Y(80)}" width="${pw}" height="${Y(50)-Y(80)}" fill="#f0b04a" opacity=".13"/>
+  <rect x="${px}" y="${Y(50)}" width="${pw}" height="${Y(0)-Y(50)}" fill="#ef6a63" opacity=".13"/>
+  <text x="${W-px}" y="${Y(80)-3}" font-size="8" fill="#c9a9b4" text-anchor="end">80%</text>
+  <text x="${W-px}" y="${Y(50)-3}" font-size="8" fill="#c9a9b4" text-anchor="end">50%</text>
+  <path d="${area}" fill="${T.glow}" opacity=".18"/>
+  <path d="${line}" fill="none" stroke="${T.glow}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="${last[0]}" cy="${last[1]}" r="5" fill="#fff" stroke="${T.glow}" stroke-width="2.5"/>
+  <text x="${px}" y="${H-3}" font-size="9" fill="#c9a9b4">${fmt(start)}</text>
+  <text x="${W-px}" y="${H-3}" font-size="9" fill="#c9a9b4" text-anchor="end">${fmt(end)}</text></svg>`;
+}
+
+function renderIntim(){
+  $('showInt').checked=prefs.int; $('intWrap').hidden=!prefs.int;
+  if(!prefs.int)return;
+  $('linkInt').checked=prefs.link;
+  $('linkNote').textContent=prefs.link?`مساهمته الحالية في المؤشر: +${Math.round(bonusAt(todayMs()))} نقطة (حتى 20 كحد أقصى). لا يُخصم شيء إن قلّت المرات.`:'غير محتسب في المؤشر حاليًا.';
+  const dd=e=>daysAgo(e.date), c7=intim.filter(e=>dd(e)<7).length, c30=intim.filter(e=>dd(e)<30).length, p30=intim.filter(e=>dd(e)>=30&&dd(e)<60).length;
+  $('i7').textContent=c7; $('i30').textContent=c30; $('ip30').textContent=p30;
+  $('intTrend').textContent=!intim.length?'سجّل أول مرة ليظهر المقياس.':c30>p30?`ارتفع العدد مقارنة بالـ30 يومًا السابقة (${c30} مقابل ${p30}).`:c30<p30?`انخفض العدد مقارنة بالـ30 يومًا السابقة (${c30} مقابل ${p30}).`:`العدد ثابت مقارنة بالـ30 يومًا السابقة (${c30}).`;
+  const wk=[];for(let w=7;w>=0;w--)wk.push(intim.filter(e=>Math.floor(dd(e)/7)===w).length);
+  const mx=Math.max(1,...wk), W=320,H=110,bw=26,gap=(W-8*bw)/9;
+  $('intChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="عدد المرات أسبوعيًا خلال 8 أسابيع">`+wk.map((v,i)=>{const h=v/mx*70,x=gap+i*(bw+gap);return `<rect x="${x}" y="${84-h}" width="${bw}" height="${Math.max(h,2)}" rx="6" fill="${i===7?'#e8627c':'#e8627c'}" opacity="${i===7?1:.55}"/><text x="${x+bw/2}" y="${78-h}" font-size="10" fill="#fbeef1" text-anchor="middle">${v}</text>`}).join('')+`<text x="${W-6}" y="${H-6}" font-size="9" fill="#c9a9b4" text-anchor="end">أقدم</text><text x="6" y="${H-6}" font-size="9" fill="#c9a9b4">الأحدث</text><text x="${W/2}" y="${H-6}" font-size="9" fill="#c9a9b4" text-anchor="middle">عدد المرات أسبوعيًا</text></svg>`;
+  const ul=$('intList'); ul.textContent='';
+  [...intim].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id).slice(0,8).forEach(e=>{
+    const li=document.createElement('li'), r=document.createElement('div'); r.className='row';
+    const d=document.createElement('span'); d.textContent=new Date(e.date+'T00:00:00').toLocaleDateString('ar-DZ',{year:'numeric',month:'long',day:'numeric'});
+    const b=document.createElement('button'); b.className='ghost'; b.textContent='حذف';
+    b.onclick=()=>{if(confirm('حذف هذا التسجيل؟')){intim=intim.filter(x=>x.id!==e.id);saveI();toast('تم الحذف');render()}};
+    r.append(d,b); li.appendChild(r); ul.appendChild(li);
+  });
+}
+
+function render(){
+  const h=healthAt(todayMs()), lv=level(h), T=THEME[lv];
+  $('pct').textContent=h+'%'; $('pct').style.color=T.col;
+  $('state').textContent=T.name; $('state').style.color=T.col;
+  $('msg').textContent=T.msg;
+  $('mark').style.left=h+'%';
+  drawHeart(lv);
+  const tr=trend(); $('trendBox').style.borderColor=tr.c; $('trendTitle').textContent=tr.t; $('trendTitle').style.color=tr.c; $('trendText').textContent=tr.d;
+  $('showLine').checked=prefs.line; $('lineWrap').hidden=!prefs.line; if(prefs.line)drawLine();
+  renderIntim();
+  $('count').textContent=items.length;
+  const ul=$('list'); ul.textContent='';
+  if(!items.length){const e=document.createElement('li'); e.className='empty'; e.textContent='لا خلافات مسجّلة بعد.'; ul.appendChild(e)}
+  [...items].sort((a,b)=>b.date.localeCompare(a.date)).forEach(c=>{
+    const li=document.createElement('li'); li.className='editable';
+    if(editingId===c.id)li.classList.add('edit-mode');
+    const top=document.createElement('div'); top.className='row';
+    const d=document.createElement('span'); d.className='date';
+    d.textContent=new Date(c.date+'T00:00:00').toLocaleDateString('ar-DZ',{year:'numeric',month:'long',day:'numeric'});
+    const s=document.createElement('span'); s.className='sev'; s.textContent=c.sev; s.style.background=sevColor(c.sev);
+    top.append(d,s);
+    const p=document.createElement('div'); p.textContent=c.desc;
+    const actions=document.createElement('div'); actions.className='li-actions';
+    const be=document.createElement('button'); be.className='ghost'; be.textContent='تعديل';
+    be.onclick=ev=>{ev.stopPropagation(); editingId=c.id; $('date').value=c.date; $('desc').value=c.desc; $('sev').value=c.sev; $('sevVal').textContent=c.sev; const sb=$('form').querySelector('button[type=submit]'); if(sb)sb.textContent='حفظ التعديل'; $('form').scrollIntoView({behavior:'smooth',block:'center'}); toast('عدّل ثم اضغط حفظ'); render()};
+    const b=document.createElement('button'); b.className='danger'; b.textContent='حذف';
+    b.onclick=ev=>{ev.stopPropagation(); if(confirm('حذف هذا الخلاف؟')){items=items.filter(x=>x.id!==c.id); if(editingId===c.id)editingId=null; save(); toast('تم الحذف'); render()}};
+    actions.append(be,b);
+    li.append(top,p,actions); ul.appendChild(li);
+  });
+}
+
+$('date').value=$('date').max=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+$('idate').value=$('idate').max=$('date').value;
+$('linkInt').onchange=e=>{prefs.link=e.target.checked;savePrefs();render()};
+$('showInt').onchange=e=>{prefs.int=e.target.checked;savePrefs();render()};
+$('intForm').onsubmit=e=>{e.preventDefault();intim.push({id:Date.now(),date:$('idate').value});saveI();toast('تم التسجيل ✓');render()};
+$('sev').oninput=e=>$('sevVal').textContent=e.target.value;
+$('showLine').onchange=e=>{prefs.line=e.target.checked;savePrefs();render()};
+$('form').onsubmit=e=>{
+  e.preventDefault();
+  const date=$('date').value, desc=$('desc').value.trim(), sev=+$('sev').value;
+  if(!desc)return toast('اكتب وصف الخلاف');
+  if(editingId){
+    const i=items.findIndex(x=>x.id===editingId);
+    if(i>=0){items[i]={...items[i],date,desc,sev}; toast('تم تعديل الخلاف ✓')}
+    editingId=null;
+    const sb=$('form').querySelector('button[type=submit]'); if(sb)sb.textContent='إضافة خلاف';
+  }else{
+    items.push({id:Date.now(),date,desc,sev});
+    toast('تمت إضافة الخلاف ✓');
+  }
+  save();$('desc').value='';$('sev').value=5;$('sevVal').textContent='5';render();
+};
+const dump=()=>JSON.stringify({conflicts:items,intimacy:intim},null,2);
+function xfer(mode){
+  $('xferBox').hidden=false; $('xferGo').hidden=mode!=='in';
+  $('xferMsg').textContent=mode==='in'?'الصق هنا نص البيانات المصدَّرة ثم اضغط «استيراد الآن». سيُدمج مع بياناتك الحالية.':'هذا نص بياناتك. اضغط «نسخ» واحفظه في مكان آمن (مثل ملاحظات الآيفون).';
+  $('xfer').value=mode==='in'?'':dump(); $('xfer').focus();
+}
+$('export').onclick=()=>{ if(!items.length&&!intim.length)return toast('لا توجد بيانات لتصديرها'); xfer('out'); };
+$('import').onclick=()=>xfer('in');
+$('xferCopy').onclick=async()=>{
+  const t=$('xfer'); t.select();
+  try{await navigator.clipboard.writeText(t.value);$('xferMsg').textContent='تم النسخ.'}catch(e){try{document.execCommand('copy');$('xferMsg').textContent='تم النسخ.'}catch(_){$('xferMsg').textContent='حدّد النص يدويًا وانسخه.'}}
+};
+$('xferGo').onclick=()=>{
+  let d; try{d=JSON.parse($('xfer').value)}catch(e){return toast('النص غير صالح. تأكد من لصقه كاملًا')}
+  const okDate=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x);
+  const cs=(Array.isArray(d)?d:d.conflicts||[]).filter(c=>c&&okDate(c.date)&&typeof c.desc==='string'&&c.sev>=1&&c.sev<=10).map(c=>({id:c.id||Date.now()+Math.random(),date:c.date,desc:c.desc.slice(0,400),sev:+c.sev}));
+  const is=(Array.isArray(d)?[]:d.intimacy||[]).filter(e=>e&&okDate(e.date)).map(e=>({id:e.id||Date.now()+Math.random(),date:e.date}));
+  if(!cs.length&&!is.length)return toast('لم أجد بيانات صالحة في النص');
+  items=union(items,cs); intim=union(intim,is); save(); saveI(); render();
+  $('xferBox').hidden=true; toast(`تم استيراد ${cs.length} خلاف و${is.length} تسجيل ✓`);
+};
+$('clear').onclick=()=>{
+  if(!(items.length||intim.length))return toast('لا توجد بيانات');
+  if(confirm('سيتم حذف جميع البيانات (الخلافات والقرب الحميم) نهائيًا. هل تريد المتابعة؟')){items=[];intim=[];editingId=null;save();saveI();toast('تم مسح جميع البيانات');render()}
+};
+// Theme
+$('themeBtn').onclick=()=>{prefs.theme=prefs.theme==='light'?'dark':'light';savePrefs();applyTheme();toast(prefs.theme==='light'?'الوضع الفاتح':'الوضع الداكن')};
+applyTheme();
+load();render();connectRemote();
+</script>
+<script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))</script>
+</body>
+</html>
